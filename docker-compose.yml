@@ -1,0 +1,46 @@
+services:
+  db:
+    image: mysql:5.7
+    container_name: prestashop_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: prestashop
+      MYSQL_USER: prestashop
+      MYSQL_PASSWORD: prestashop
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - prestashop_db_data:/var/lib/mysql
+    networks:
+      - prestashop-net
+
+  prestashop:
+    image: prestashop/prestashop:8.0   # O usa 'latest'
+    container_name: prestashop_web
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      DB_SERVER: prestashop_db
+      DB_NAME: prestashop
+      DB_USER: prestashop
+      DB_PASSWD: prestashop   # 👈 Este es el correcto
+      DB_PREFIX: ps_
+      PS_INSTALL_AUTO: 1
+      PS_ERASE_DB: 0
+      PS_DEV_MODE: 1
+      PS_DOMAIN: localhost:8090
+      PS_LANGUAGE: es
+      PS_COUNTRY: ec
+    depends_on:
+      - db
+    networks:
+      - prestashop-net
+
+networks:
+  prestashop-net:
+
+volumes:
+  prestashop_db_data:
