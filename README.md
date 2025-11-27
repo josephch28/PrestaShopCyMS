@@ -38,8 +38,8 @@ Durante la instalación automática se crean las siguientes credenciales:
 |-----------|-------|
 | URL Front-Office | http://localhost:8090 |
 | URL Back-Office | http://localhost:8090/admin (deberás renombrarla luego por seguridad) |
-| Usuario Admin | admin@prestashop.com |
-| Contraseña Admin | prestashop |
+| Usuario Admin | demo@prestashop.com |
+| Contraseña Admin | prestashop_demo |
 | Base de datos | prestashop |
 | Usuario DB | prestashop |
 | Contraseña DB | prestashop |
